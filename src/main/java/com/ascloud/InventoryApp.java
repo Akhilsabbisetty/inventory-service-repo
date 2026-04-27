@@ -5,18 +5,20 @@ import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import java.util.Map;
 
 @SpringBootApplication
 @RestController
+@CrossOrigin(origins = "*")
 public class InventoryApp {
 
     @Autowired
     private StringRedisTemplate redis;
 
     @GetMapping("/inventory")
-    public String inventory() {
+    public Map<String, String> inventory() {
         redis.opsForValue().set("stock", "100");
-        return redis.opsForValue().get("stock");
+        return Map.of("stock", redis.opsForValue().get("stock"));
     }
 
     public static void main(String[] args) {
