@@ -17,7 +17,7 @@ public class InventoryApp {
 
     @GetMapping("/inventory")
     public Map<String, String> inventory() {
-        redis.opsForValue().set("stock", "100");
+        redis.opsForValue().set("stock", "1000");
         return Map.of("stock", redis.opsForValue().get("stock"));
     }
 
